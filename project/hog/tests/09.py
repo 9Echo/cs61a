@@ -5,14 +5,14 @@ test = {
     {
       'cases': [
         {
-          'answer': '98acc434a18370bb040345206aea9e70',
+          'answer': 'The lowest num_rolls',
           'choices': [
             'The lowest num_rolls',
             'The highest num_rolls',
             'A random num_rolls'
           ],
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'question': r"""
           If multiple num_rolls are tied for the highest scoring
           average, which should you return?
