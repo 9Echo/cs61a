@@ -12,6 +12,15 @@ def couple(s, t):
     """
     assert len(s) == len(t)
     "*** YOUR CODE HERE ***"
+    n = len(s)
+    res = []
+    for i in range(n):
+        tmp = []
+        tmp.append(s[i])
+        tmp.append(t[i])
+        res.append(tmp)
+
+    return res
 
 
 from math import sqrt
@@ -27,6 +36,12 @@ def distance(city_a, city_b):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    city_a_lat = get_lat(city_a)
+    city_a_lon = get_lon(city_a)
+    city_b_lat = get_lat(city_b)
+    city_b_lon = get_lon(city_b)
+
+    return sqrt((city_a_lat-city_b_lat)**2 + (city_a_lon-city_b_lon)**2)
 
 def closer_city(lat, lon, city_a, city_b):
     """
@@ -44,6 +59,13 @@ def closer_city(lat, lon, city_a, city_b):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    city_name = 'city'
+    tmp_city = make_city(city_name, lat, lon)
+    dist_a = distance(city_a, tmp_city)
+    dist_b = distance(city_b, tmp_city)
+    
+    return get_name(city_a) if dist_a < dist_b else get_name(city_b)
+
 
 def check_city_abstraction():
     """
@@ -143,8 +165,14 @@ def berry_finder(t):
     True
     """
     "*** YOUR CODE HERE ***"
+    if label(t) == 'berry':
+        return True
+    for tmp_tree in branches(t):
+        if berry_finder(tmp_tree):
+            return True
+    return False
 
-
+        
 def sprout_leaves(t, leaves):
     """Sprout new leaves containing the data in leaves at each leaf in
     the original tree t and return the resulting tree.
@@ -178,7 +206,14 @@ def sprout_leaves(t, leaves):
           1
           2
     """
+    """
+    new2 = tree(1, [tree(2, [tree(3, [tree(6), tree(1), tree(2)])])])
+    """
     "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return tree(label(t), [tree(leaf) for leaf in leaves])
+    return tree(label(t), [sprout_leaves(s, leaves) for s in branches(t)])
+
 
 # Abstraction tests for sprout_leaves and berry_finder
 def check_abstraction():
